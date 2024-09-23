@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CLISH_MODULE xmlns="http://clish.sourceforge.net/XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://clish.sourceforge.net/XMLSchema
+                     http://clish.sourceforge.net/XMLSchema/clish.xsd">
+    <!--=======================================================-->
+    <VIEW name="main">
+        <!--===================================================-->
+        <COMMAND name="config syslog"
+                 help="Configure Syslog">
+
+                <PARAM name="state"
+                   help="set host name  or IP address for sntp server"
+                   optional="true"
+                   oder = "true"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+                <PARAM name="stateValue"
+                       optional="false"
+                       help="filter name"
+                       ptype="STATE"/>
+            </PARAM>
+
+            <PARAM name="proto"
+                   help="set host name  or IP address for sntp server"
+                   optional="true"
+                   oder = "true"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+                <PARAM name="protoValue"
+                       optional="false"
+                       help="filter name"
+                       ptype="PROTO_2"/>
+            </PARAM>
+
+            <PARAM name="port"
+                   help="set host name  or IP address for sntp server"
+                   optional="true"
+                   oder = "true"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+                <PARAM name="portValue"
+                       optional="false"
+                       help="filter name"
+                       ptype="UINT"/>
+            </PARAM>
+            <ACTION>
+                /etc/tf_clish/scripts/rsyslog/syslog_config.lua "state" "${stateValue}" "proto" "${protoValue}" "port" "${portValue}"
+            </ACTION>
+        </COMMAND>
+
+        <COMMAND name="config log"
+                 help="Configure log">
+        </COMMAND>
+
+        <COMMAND name="config log filter"
+                 help="ON/OFF send syslog message">
+
+            <PARAM name="add_delete"
+                optional="false"
+                help="vlan tagged type"
+                ptype="LOG_EDIT_DELETE"/>
+
+            <PARAM name="name"
+                   help="set host name  or IP address for sntp server"
+                   optional="false"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+                <PARAM name="nameValue"
+                       optional="false"
+                       help="filter name"
+                       ptype="STRING"/>
+            </PARAM>
+
+            <PARAM name="facility"
+                   help="set host name  or IP address for sntp server"
+                   test = '${add_delete} != "delete"'
+                   optional="true"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+                <PARAM name="facilityValue"
+                       optional="false"
+                       help="facilityValue"
+                       ptype="LOG_FACILITY"/>
+            </PARAM>
+
+            <PARAM name="severity"
+                   help="set host name  or IP address for sntp server"
+                   test = '${add_delete} != "delete"'
+                   optional="true"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+                <PARAM name="severityValue"
+                       optional="false"
+                       help="severityValue"
+                       ptype="LOG_SEVERITY"/>
+            </PARAM>
+
+            <PARAM name="progname"
+                   help="program name or part of a name"
+                   test = '${add_delete} != "delete"'
+                   optional="true"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+                <PARAM name="prognameValue"
+                       optional="false"
+                       help="program name value"
+                       ptype="STRING"/>
+            </PARAM>
+
+            <PARAM name="content"
+                   help="filter by the occurrence of the specified substring in the message body"
+                   test = '${add_delete} != "delete"'
+                   optional="true"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+                <PARAM name="contentValue"
+                       optional="false"
+                       help="host name"
+                       ptype="STRING"/>
+            </PARAM>
+
+            <ACTION>
+                /etc/tf_clish/scripts/rsyslog/log_config.lua "filter" "${add_delete}" "name" "${nameValue}" "facility" "${facilityValue}"  "severity" "${severityValue}" "progname" "${prognameValue}" "content" "${contentValue}"
+            </ACTION>
+        </COMMAND>
+
+        <COMMAND name="config log action"
+                 help="ON/OFF send syslog message">
+            <PARAM name="add_delete"
+                optional="false"
+                help="vlan tagged type"
+                ptype="LOG_EDIT_DELETE"/>
+
+            <PARAM name="name"
+                   help="set host name  or IP address for sntp server"
+                   optional="false"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+                <PARAM name="nameValue"
+                       optional="false"
+                       help="filter name"
+                       ptype="STRING"/>
+            </PARAM>
+
+            <PARAM name="action"
+                   help="set host name or IP address for sntp server"
+                   est = '${add_delete} != "delete"'
+                   optional="true"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+                <PARAM name="actionValue"
+                       optional="false"
+                       help="facilityValue"
+                       ptype="LOG_ACTION"/>
+            </PARAM>
+
+            <PARAM name="log_email"
+                   help="set host name or IP address for sntp server"
+                   est = '${add_delete} != "delete"'
+                   optional="true"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+                <PARAM name="log_emailValue"
+                       optional="false"
+                       help="email list"
+                       ptype="STRING"/>
+            </PARAM>
+
+            <PARAM name="log_syslog"
+                   help="program name or part of a name"
+                   est = '${add_delete} != "delete"'
+                   optional="true"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+                <PARAM name="log_syslogValue"
+                       optional="false"
+                       help="program name value"
+                       ptype="STRING"/>
+            </PARAM>
+            <ACTION>
+                /etc/tf_clish/scripts/rsyslog/log_config.lua "action" "${add_delete}" "name" "${nameValue}" "action" "${actionValue}" "log_email" "${log_emailValue}" "log_syslog" "${log_syslogValue}"
+            </ACTION>
+        </COMMAND>
+        <COMMAND name="config log rule"
+                   help="ON/OFF send syslog message">
+             <PARAM name="add_delete"
+                optional="false"
+                help="vlan tagged type"
+                ptype="LOG_EDIT_DELETE"/>
+
+            <PARAM name="name"
+                   help="set host name  or IP address for sntp server"
+                   optional="false"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+                <PARAM name="nameValue"
+                       optional="false"
+                       help="filter name"
+                       ptype="STRING"/>
+            </PARAM>
+
+            <PARAM name="filter"
+                   help="program name or part of a name"
+                   test = '${add_delete} != "delete"'
+                   optional="true"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+                <PARAM name="filterValue"
+                       optional="false"
+                       help="program name value"
+                       ptype="STRING"/>
+            </PARAM>
+            <PARAM name="action"
+                   test = '${add_delete} != "delete"'
+                   help="program name or part of a name"
+                   optional="true"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+                <PARAM name="actionValue"
+                       optional="false"
+                       help="program name value"
+                       ptype="STRING"/>
+            </PARAM>
+            <ACTION>
+                echo "add_delete" "${add_delete}"
+                /etc/tf_clish/scripts/rsyslog/log_config.lua "rule" "${add_delete}" "name" "${nameValue}" "filter" "${filterValue}" "action" "${actionValue}"
+            </ACTION>
+        </COMMAND>
+    </VIEW>
+    <!--=======================================================-->
+</CLISH_MODULE>

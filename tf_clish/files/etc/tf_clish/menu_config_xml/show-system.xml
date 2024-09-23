@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CLISH_MODULE xmlns="http://clish.sourceforge.net/XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://clish.sourceforge.net/XMLSchema
+                     http://clish.sourceforge.net/XMLSchema/clish.xsd">
+    <!--=======================================================-->
+    <VIEW name="main">
+        <!--===================================================-->
+
+		<COMMAND name="show switch"
+             help="Show switch information">
+			<ACTION>
+				/etc/tf_clish/scripts/system/show_switch.lua
+			</ACTION>
+		</COMMAND>	
+
+        <COMMAND name="show user"
+             help="user information">
+			<ACTION>
+				/etc/tf_clish/scripts/user/show_user.lua
+			</ACTION>
+		</COMMAND>
+
+         <!--=============
+        <COMMAND name="show packets"
+             help="user information">
+			<ACTION>
+				/etc/tf_clish/scripts/system/show_packets.lua
+			</ACTION>
+		</COMMAND>
+		======================-->
+
+    </VIEW>
+    <!--=======================================================-->
+</CLISH_MODULE>

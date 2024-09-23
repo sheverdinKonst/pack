@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CLISH_MODULE xmlns="http://clish.sourceforge.net/XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://clish.sourceforge.net/XMLSchema
+                     http://clish.sourceforge.net/XMLSchema/clish.xsd">
+    <!--=======================================================-->
+    <VIEW name="main">
+        <!--===================================================-->
+		<COMMAND name="show stp"
+             help="Show Spanning Tree information">
+        </COMMAND>
+
+        <COMMAND name="show stp config"
+                 help="Show Spanning Tree configuration">
+        </COMMAND>
+         <COMMAND name="show stp config bridge"
+                 help="Show Spanning Tree bridge configuration">
+              <ACTION>
+                /etc/tf_clish/scripts/stp/show_stp_config.lua "bridge" "switch"
+             </ACTION>
+        </COMMAND>
+
+         <COMMAND name="show stp config ports"
+                 help="Show Spanning Tree bridge configuration">
+              <PARAM name="portValue"
+                       optional="true"
+                       order="true"
+                       help="sport value - range: 1-10 or only one: 2"
+                       ptype="PORT_NUM_LIST_1_10"/>
+             <ACTION>
+                if [[ -z "${portValue}" ]]; then
+                    /etc/tf_clish/scripts/stp/show_stp_config.lua "ports" "all"
+                fi
+
+                if [[ -n "${portValue}" ]]; then
+                    /etc/tf_clish/scripts/stp/show_stp_config.lua "ports" "${portValue}"
+                fi
+             </ACTION>
+        </COMMAND>
+
+        <COMMAND name="show stp status"
+                 help="Show Spanning Tree status ">
+        </COMMAND>
+         <COMMAND name="show stp status bridge"
+                 help="Show Spanning Tree bridge status">
+              <ACTION>
+                 /etc/tf_clish/scripts/stp/show_stp_status.lua "bridge" "switch"
+             </ACTION>
+        </COMMAND>
+
+         <COMMAND name="show stp status ports"
+                 help="Show Spanning Tree ports status">
+              <PARAM name="portValue"
+                   optional="true"
+                   order="true"
+                   help="sport value - range: 1-10 or only one: 2"
+                   ptype="PORT_NUM_LIST_1_10"/>
+             <ACTION>
+                if [[  -z "${portValue}" ]]; then
+                    /etc/tf_clish/scripts/stp/show_stp_status.lua "ports" "all"
+                fi
+
+                if [[  -n "${portValue}" ]]; then
+                    /etc/tf_clish/scripts/stp/show_stp_status.lua "ports" "${portValue}"
+                fi
+             </ACTION>
+        </COMMAND>
+	</VIEW>
+    <!--=======================================================-->
+</CLISH_MODULE>

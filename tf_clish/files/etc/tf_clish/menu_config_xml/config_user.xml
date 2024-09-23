@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CLISH_MODULE xmlns="http://clish.sourceforge.net/XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://clish.sourceforge.net/XMLSchema
+                     http://clish.sourceforge.net/XMLSchema/clish.xsd">
+    <!--  =======================================================-->
+    <VIEW name="main">
+        <!--===================================================-->
+
+        <COMMAND name="config user"
+                 help="Add/delete user, set password and Access level"
+                 lock="false"
+                 interrupt="true">
+        </COMMAND>
+
+        <COMMAND name="config user add"
+                 help="Add user, set password and access level"
+                 lock="false"
+                 interrupt="true">
+            <PARAM name="user_name"
+                   help="set user name"
+                   optional="false"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+                <PARAM name="username"
+                       help="user name"
+                       ptype="STRING"/>
+            </PARAM>
+
+            <PARAM name="admin_rule"
+                   help="set Access level"
+                   optional="false"
+                   order="true"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+                <PARAM name="adminruleValue"
+                       help="admin rule Value"
+                       ptype="ADMIN_RULE"/>
+            </PARAM>
+
+
+            <PARAM name="password"
+                   help="set Access level"
+                   optional="true"
+                   order="true"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+                <PARAM name="passValue"
+                       help="user password"
+                       ptype="STRING"/>
+            </PARAM>
+
+            <ACTION>
+                if [[ -n "${passValue}" ]]; then
+                    /etc/tf_clish/scripts/user/config_user.lua "-a" ${username} "${passValue}" ${adminruleValue}
+                else
+                   /etc/tf_clish/scripts/user/getPass.sh "-a" ${username} ${adminruleValue}
+                fi
+            </ACTION>
+        </COMMAND>
+
+        <COMMAND name="config user delete"
+                 help="Delete user"
+                 lock="false"
+                 interrupt="false">
+
+            <PARAM name="user_name"
+                   help="set user name"
+                   optional="false"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+                <PARAM name="username"
+                       help="user name"
+                       ptype="STRING"/>
+            </PARAM>
+
+            <PARAM name="admin_rule"
+                   help="set Access level"
+                   optional="false"
+                   order="true"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+                <PARAM name="adminruleValue"
+                       help="admin rule Value"
+                       ptype="ADMIN_RULE"/>
+            </PARAM>
+
+            <PARAM name="password"
+                   help="set Access level"
+                   optional="false"
+                   order="true"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+                <PARAM name="passValue"
+                       help="user password"
+                       ptype="STRING"/>
+            </PARAM>
+
+            <ACTION>
+                 if [[ -n "${passValue}" ]]; then
+                    /etc/tf_clish/scripts/user/config_user.lua "-d" ${username} "${passValue}" ${adminruleValue}
+                else
+                   /etc/tf_clish/scripts/user/getPass.sh "-d" ${username} ${adminruleValue}
+                fi
+            </ACTION>
+        </COMMAND>
+    </VIEW>
+    <!--=======================================================-->
+</CLISH_MODULE>

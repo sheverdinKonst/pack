@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CLISH_MODULE xmlns="http://clish.sourceforge.net/XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://clish.sourceforge.net/XMLSchema
+                     http://clish.sourceforge.net/XMLSchema/clish.xsd">
+    <!--=======================================================-->
+    <VIEW name="main">
+        <!--===================================================-->
+		<COMMAND name="show sfp"
+             help="arp sfp information">
+		</COMMAND>
+
+        <COMMAND name="show sfp 1"
+             help="arp sfp 1 (port 9) information">
+             <ACTION>
+                 /etc/tf_clish/scripts/peripheral/sfp.lua "1"
+            </ACTION>
+		</COMMAND>
+
+        <COMMAND name="show sfp 2"
+             help="arp sfp 2 (port 10) information">
+             <ACTION>
+                 /etc/tf_clish/scripts/peripheral/sfp.lua "2"
+            </ACTION>
+		</COMMAND>
+
+        <COMMAND name="show ups"
+             help="UPS information">
+             <ACTION>
+                /etc/tf_clish/scripts/perepherial/ups.lua
+            </ACTION>
+		</COMMAND>
+
+        <COMMAND name="show output"
+             help="Show PoE information">
+		</COMMAND>
+
+        <COMMAND name="show output config"
+                 help="Show output configuration">
+            <ACTION>
+                /etc/tf_clish/scripts/peripheral/io.lua "show" "config" "relay"
+            </ACTION>
+        </COMMAND>
+
+        <COMMAND name="show output status"
+                 help="Show output status">
+            <ACTION>
+                /etc/tf_clish/scripts/peripheral/io.lua "show" "status" "relay"
+            </ACTION>
+        </COMMAND>
+
+        <COMMAND name="show input"
+             help="Show input information">
+		</COMMAND>
+
+        <COMMAND name="show input config"
+                 help="Show input configuration">
+            <ACTION>
+                /etc/tf_clish/scripts/peripheral/io.lua "show" "config" "input"
+            </ACTION>
+        </COMMAND>
+
+        <COMMAND name="show input status"
+                 help="Show input status">
+            <ACTION>
+                /etc/tf_clish/scripts/peripheral/io.lua "show" "status" "input"
+            </ACTION>
+        </COMMAND>
+
+
+    </VIEW>
+    <!--=======================================================-->
+</CLISH_MODULE>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CLISH_MODULE xmlns="http://clish.sourceforge.net/XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://clish.sourceforge.net/XMLSchema
+                     http://clish.sourceforge.net/XMLSchema/clish.xsd">
+    <!--=======================================================-->
+    <VIEW name="main">
+        <!--===================================================-->
+
+        <COMMAND name="show smtp"
+                 help="Show SMTP information">
+        </COMMAND>
+
+        <COMMAND name="show smtp config"
+                 help="Show SMTP information">
+            <ACTION>
+                /etc/tf_clish/scripts/smpt/smtp_show.lua "show_config"
+            </ACTION>
+        </COMMAND>
+
+        <COMMAND name="show smtp config password"
+                 help="Show SMTP information">
+            <ACTION>
+                /etc/tf_clish/scripts/smpt/smtp_show.lua "show_config" "password"
+            </ACTION>
+        </COMMAND>
+
+        <COMMAND name="show smtp test"
+                 help="Show SMTP information">
+            <ACTION>
+                /etc/tf_clish/scripts/smpt/smtp_show.lua "test"
+            </ACTION>
+        </COMMAND>
+
+    </VIEW>
+    <!--=======================================================-->
+</CLISH_MODULE>
